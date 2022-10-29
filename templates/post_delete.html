@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<!--MAKE SURE THE USER IS LOGGED IN TO DELETE POST-->
+{% if user.is_authenticated %}
+    <h1>Delete post</h1>
+    <form action="" method="post">{% csrf_token %}
+    <p>Are you sure you want to delete "{{ post.title }}"?</p>
+    <input type="submit" value="Confirm">
+    </form>
+{% else %}
+    <p>Please login to delete Post</p>
+{% endif %}
+{% endblock content %}

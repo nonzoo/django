@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!--MAKE SURE THE USER IS LOGGED IN TO EDIT A POST-->
+{% if user.is_authenticated %}
+    <h1>Edit post</h1>
+    <form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Update">
+    </form>
+{% else %}
+    <p>Please Log In To Edit</p>
+{% endif %}
+
+{% endblock content %}

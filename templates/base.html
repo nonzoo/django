@@ -1,0 +1,45 @@
+<!-- templates/base.html -->
+{% load static %} <!-- new -->
+<html>
+    <head>
+        <title>My blog</title>
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <a href="{% url 'login' %}">Log In</a> |
+        <a href="{% url 'signup' %}">Sign Up</a>
+    </head>
+    <body>
+        <header>
+            <div class="nav-left">
+                <h1><a href= "{% url 'home' %}">Django blog</a></h1>
+            </div>
+            <!--make sure the user is logged in to create a new post-->
+            {% if user.is_authenticated %}
+                <div class="nav-right">
+                    <a href= "{% url 'post_new' %}">+ New Blog Post</a>    
+                </div>
+            {% else %}
+                <div class = "nav-right">
+                    <a href="{% url 'login' %}">Log In To Post</a>
+                </div>
+            {% endif %}        
+        </header>
+        <!--to show if the user is logged in -->
+        {% if user.is_authenticated %}
+        <p>Welcome {{ user.username }}!</p>
+
+        {% else %}
+        <p>You are not logged in.</p>
+
+        {% endif %}
+       
+    <div>
+        {% block content %}
+        {% endblock content %} 
+        {% if user.is_authenticated %}
+            <p><a href="{% url 'logout' %}">Log out</a></p>
+        {% else %}
+            <a href="{% url 'login' %}">Log In</a>
+        {% endif %}
+    </div>
+    </body>
+</html>
